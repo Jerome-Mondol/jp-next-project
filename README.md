@@ -1,24 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Jerome-Mondol Next.js Project
 
-## Getting Started
+A simple e-commerce application built with Next.js 15/16 using the App Router. The application includes public pages for browsing items and protected pages for adding items, with basic authentication.
 
-First, run the development server:
+## Technologies Used
+- Next.js 15/16 (App Router)
+- React
+- Tailwind CSS
+- Express.js (for API)
+- JavaScript (JSX, no TypeScript)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Setup & Installation Instructions
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd jp-next-project
+   ```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) with your browser.
+
+## Route Summary
+- `/` - Landing Page
+- `/login` - Login Page
+- `/items` - Item List Page
+- `/items/[id]` - Item Details Page
+- `/add-item` - Add Item Page (Protected)
+
+## Implemented Features
+- Landing Page with 7 sections, Navbar, and Footer
+- Mock Authentication with cookie storage
+- Item List Page fetching from Express API
+- Item Details Page
+- Protected Add Item Page
+- Toast notifications (optional)
+
+## Brief Explanation of Features
+- **Landing Page**: Public page with navigation to login and items.
+- **Authentication**: Hardcoded email/password login, stores in cookies, redirects to items on success.
+- **Item List**: Displays items from API with name, description, price, image.
+- **Item Details**: Shows full details of a selected item.
+- **Add Item**: Form to add new items, stored via API, requires login.
+
+## Deployment
+Deploy on Vercel for the live site.
+
+## Login Credentials
+- Email: admin@example.com
+- Password: password123
 
 ## Learn More
 
