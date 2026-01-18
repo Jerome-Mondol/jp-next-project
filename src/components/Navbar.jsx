@@ -1,20 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
 export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const auth = Cookies.get('auth');
-    setIsLoggedIn(!!auth);
-  }, []);
+  const isLoggedIn = !!Cookies.get('auth');
 
   const handleLogout = () => {
     Cookies.remove('auth');
-    setIsLoggedIn(false);
     window.location.href = '/';
   };
 

@@ -15,7 +15,7 @@ export default function Login() {
     e.preventDefault();
     if (email === 'admin@example.com' && password === 'password123') {
       Cookies.set('auth', 'true', { expires: 1 }); // expires in 1 day
-      router.push('/items');
+      window.location.href = '/items'; // Force full page reload to update navbar
     } else {
       alert('Invalid credentials');
     }
