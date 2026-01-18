@@ -12,20 +12,36 @@ export default function Navbar() {
     setIsLoggedIn(!!auth);
   }, []);
 
+  const handleLogout = () => {
+    Cookies.remove('auth');
+    setIsLoggedIn(false);
+    window.location.href = '/';
+  };
+
   return (
-    <nav className="bg-white shadow-sm border-b border-gray-200">
+    <nav className="bg-white shadow-sm border-b border-neutral-200">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-gray-800 hover:text-blue-600 transition duration-300">
+        <Link href="/" className="text-2xl font-bold text-neutral-800 hover:text-primary transition duration-300">
           E-Shop
         </Link>
         <div className="space-x-6">
-          <Link href="/login" className="text-gray-700 hover:text-blue-600 font-medium transition duration-300">
-            Login
-          </Link>
-          <Link href="/items" className="bg-blue-600 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-700 transition duration-300">
+          {!isLoggedIn ? (
+            <Link href="/login" className="text-gray-700 hover:text-primary font-medium transition duration-300">
+              Login
+            </Link>
+          ) : (
+            <>
+              <Link href="/add-item" className="text-gray-700 hover:text-primary font-medium transition duration-300">
+                Add Item
+              </Link>
+              <button onClick={handleLogout} className="text-gray-700 hover:text-primary font-medium transition duration-300">
+                Logout
+              </button>
+            </>
+          )}
+          <Link href="/items" className="border border-primary text-primary px-4 py-2 rounded-full font-medium hover:bg-primary hover:text-white transition duration-300 bg-slate-800">
             Shop
           </Link>
-          {isLoggedIn && <Link href="/add-item" className="hover:underline">Add Item</Link>}
         </div>
       </div>
     </nav>

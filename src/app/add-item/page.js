@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 import toast from 'react-hot-toast';
 
 export default function AddItem() {
@@ -11,10 +12,17 @@ export default function AddItem() {
   const [image, setImage] = useState('');
   const router = useRouter();
 
+  useEffect(() => {
+    const auth = Cookies.get('auth');
+    if (!auth) {
+      router.push('/login');
+    }
+  }, [router]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/items', {
+      const response = await fetch('https://jp-next-project-server.onrender.com/api/items', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,8 +45,8 @@ export default function AddItem() {
       <div className="container mx-auto px-4">
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Add New Product</h1>
-            <p className="text-gray-600">Fill in the details to add a new item to our store</p>
+            <h1 className="text-3xl font-bold text-neutral-900 mb-2">Add New Product</h1>
+            <p className="text-gray-700">Fill in the details to add a new item to our store</p>
           </div>
           <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-sm space-y-6">
             <div>
@@ -50,8 +58,8 @@ export default function AddItem() {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter product name"
+                className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                placeholder="e.g. Wireless Headphones"
                 required
               />
             </div>
@@ -64,8 +72,8 @@ export default function AddItem() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter product description"
+                className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                placeholder="Describe the product features and benefits"
                 required
               />
             </div>
@@ -80,8 +88,8 @@ export default function AddItem() {
                 onChange={(e) => setPrice(e.target.value)}
                 step="0.01"
                 min="0"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="0.00"
+                className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                placeholder="99.99"
                 required
               />
             </div>
@@ -94,14 +102,14 @@ export default function AddItem() {
                 id="image"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 placeholder="https://example.com/image.jpg"
                 required
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300"
+              className="w-full bg-gray-200 text-black py-3 px-4 rounded-md font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300"
             >
               Add Product
             </button>
